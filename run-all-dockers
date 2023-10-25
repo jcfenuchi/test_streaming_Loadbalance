@@ -1,0 +1,14 @@
+#!/bin/bash
+docker stop $(docker ps -aq)
+docker build -t jcfenuchi/streaming-server ./Streaming_server
+docker build -t jcfenuchi/cacheserver ./cache_server
+docker build -t jcfenuchi/loadbalancer ./nginx-loadbalancer
+
+docker run -d --rm -p 8554:8554 --name streaming-server --ip 172.17.0.2 jcfenuchi/streaming-server
+docker run -d --rm --name cache01 --ip 172.17.0.3 jcfenuchi/cacheserver
+docker run -d --rm --name cache02 --ip 172.17.0.4 jcfenuchi/cacheserver
+docker run -d --rm --name cache03 --ip 172.17.0.5 jcfenuchi/cacheserver
+docker run -d --rm -p 80:80 --name nginx-loadbalance --ip 172.17.0.5 jcfenuchi/loadbalancer
+
+# para ver o streaming via cache ffplay -i http://$cache_ip:8888/lb_streaming/index.m3u8
+
