@@ -550,6 +550,7 @@ paths:
   lb_streaming:
     source: rtsp://172.17.0.2:8554/streaming_video
 
+
   # example:
   # my_camera:
   #   source: rtsp://my_camera

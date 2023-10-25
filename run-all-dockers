@@ -11,4 +11,5 @@ docker run -d --rm --name cache03 --ip 172.17.0.5 jcfenuchi/cacheserver
 docker run -d --rm -p 80:80 --name nginx-loadbalance --ip 172.17.0.5 jcfenuchi/loadbalancer
 
 # para ver o streaming via cache ffplay -i http://$cache_ip:8888/lb_streaming/index.m3u8
+# para ver o streaming via nginx ffplay -i http://127.0.0.1/hls/index.m3u8
 
